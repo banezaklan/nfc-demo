@@ -6,7 +6,7 @@
   <meta http-equiv="origin-trial" content="AjYc0hTggXCNDoIJrcJ7qm5JAYufFgsdZrRw5x4LfxlIuU3C7t5fhhwmKgp5ydOCjQdnUiuE//pL85k75Exdjg4AAABdeyJvcmlnaW4iOiJodHRwczovL2dpdGh1Yi5jb206NDQzIiwiZmVhdHVyZSI6IldlYk5GQyIsImV4cGlyeSI6MTU4NjUyODc1MiwiaXNTdWJkb21haW4iOnRydWV9">
 </head>
 <body>
-<div><p>Version 9</p></div>
+<div><p>Version 10</p></div>
 <div id="mess" style="font-size: 24px;"></div>
 </body>
 <script type="application/javascript">
@@ -21,9 +21,9 @@
       const reader = new NDEFReader();
 
       await navigator.permissions.query({name:'nfc'}).then(function(permissionStatus) {
-        addMess('Permission status is ', permissionStatus.state);
+        addMess('Permission status is '+permissionStatus.state);
         permissionStatus.onchange = function() {
-          console.log('Permission status has changed to ', this.state);
+          addMess('Permission status has changed to '+this.state);
         };
       });
 
@@ -37,8 +37,8 @@
       }
 
     } else {
-      console.warn('There is no NDEReader in window!');
-      document.getElementById("mess").innerHTML += "<p>There is no NDEReader in window!</p>";
+      console.warn('There is no NDEFReader in window!');
+      addMess('There is no NDEFReader in window!')
     }
   }
   nfcRead()
