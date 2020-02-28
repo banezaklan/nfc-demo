@@ -17,7 +17,7 @@
       await reader.scan();
       reader.onreading = ({ message }) => {
         console.log(`Message read from a NFC tag: ${message}`);
-        document.getElementById("mess").innerHTML += "<p>"+message+"</p>";
+        document.getElementById("mess").innerHTML += "<p>### "+message+"</p>";
       };
     } else {
       console.warn('There is no NDEReader in window!');
