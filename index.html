@@ -6,7 +6,7 @@
   <meta http-equiv="origin-trial" content="AjYc0hTggXCNDoIJrcJ7qm5JAYufFgsdZrRw5x4LfxlIuU3C7t5fhhwmKgp5ydOCjQdnUiuE//pL85k75Exdjg4AAABdeyJvcmlnaW4iOiJodHRwczovL2dpdGh1Yi5jb206NDQzIiwiZmVhdHVyZSI6IldlYk5GQyIsImV4cGlyeSI6MTU4NjUyODc1MiwiaXNTdWJkb21haW4iOnRydWV9">
 </head>
 <body>
-<div><p>Version 8</p></div>
+<div><p>Version 9</p></div>
 <div id="mess" style="font-size: 24px;"></div>
 </body>
 <script type="application/javascript">
@@ -20,9 +20,12 @@
       addMess('NDEFReader present');
       const reader = new NDEFReader();
 
-      await navigator.permissions.query({name:'nfc'}).then((permissionStatus)=>{
-        addMess(permissionStatus.state);
-      })
+      await navigator.permissions.query({name:'nfc'}).then(function(permissionStatus) {
+        addMess('Permission status is ', permissionStatus.state);
+        permissionStatus.onchange = function() {
+          console.log('Permission status has changed to ', this.state);
+        };
+      });
 
       await reader.scan().then(() => {
         addMess('NDEFReader activated!')
