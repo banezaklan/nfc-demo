@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.6">
   <title>Title</title>
   <meta http-equiv="origin-trial" content="AjYc0hTggXCNDoIJrcJ7qm5JAYufFgsdZrRw5x4LfxlIuU3C7t5fhhwmKgp5ydOCjQdnUiuE//pL85k75Exdjg4AAABdeyJvcmlnaW4iOiJodHRwczovL2dpdGh1Yi5jb206NDQzIiwiZmVhdHVyZSI6IldlYk5GQyIsImV4cGlyeSI6MTU4NjUyODc1MiwiaXNTdWJkb21haW4iOnRydWV9">
 </head>
 <body>
-<div><p>Version 11</p></div>
+<div><p>Version 12</p></div>
 <div id="mess" style="font-size: 24px;"></div>
 </body>
 <script type="application/javascript">
@@ -19,12 +20,11 @@
     if ('NDEFReader' in window) {
       addMess('NDEFReader present');
 
-      await navigator.permissions.query({name:'nfc'}).then(function(permissionStatus) {
-        addMess('Permission status is '+permissionStatus.state);
-        permissionStatus.onchange = function() {
-          addMess('Permission status has changed to '+this.state);
-        };
-      });
+      const permissionStatus = await navigator.permissions.query({name:'nfc'}).catch(e=>addMess(e));
+      addMess('Permission status is '+permissionStatus.state);
+      permissionStatus.onchange = function() {
+        addMess('Permission status has changed to '+this.state);
+      };
 
       const reader = new NDEFReader();
       await reader.scan().then(() => {
