@@ -21,6 +21,8 @@
       const reader = new NDEFReader();
       await reader.scan().then(()=>{
         addMess('NDEFReader activated!')
+      }).catch(e=>{
+        addMess(e);
       })
       reader.onreading = ({ message })=>{
         addMess(`### ${message}`)
