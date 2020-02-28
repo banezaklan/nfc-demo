@@ -6,20 +6,26 @@
   <meta http-equiv="origin-trial" content="AjYc0hTggXCNDoIJrcJ7qm5JAYufFgsdZrRw5x4LfxlIuU3C7t5fhhwmKgp5ydOCjQdnUiuE//pL85k75Exdjg4AAABdeyJvcmlnaW4iOiJodHRwczovL2dpdGh1Yi5jb206NDQzIiwiZmVhdHVyZSI6IldlYk5GQyIsImV4cGlyeSI6MTU4NjUyODc1MiwiaXNTdWJkb21haW4iOnRydWV9">
 </head>
 <body>
-<div><p>Version 2</p></div>
+<div><p>Version 4</p></div>
 <div id="mess" style="font-size: 24px;"></div>
 </body>
 <script type="application/javascript">
 
+  const addMess = (mess)=>{
+    document.getElementById("mess").innerHTML += `<p>${mess}</p>`;
+  }
+
   const nfcRead = async ()=>{
     if ('NDEFReader' in window) {
-      document.getElementById("mess").innerHTML += "<p>NDEFReader started!</p>";
+      addMess('NDEFReader present');
       const reader = new NDEFReader();
-      await reader.scan();
-      reader.onreading = ({ message }) => {
-        console.log(`Message read from a NFC tag: ${message}`);
-        document.getElementById("mess").innerHTML += "<p>### "+message+"</p>";
-      };
+      await reader.scan().then(()=>{
+        addMess('NDEFReader activated!')
+      })
+      reader.onreading = ({ message })=>{
+        addMess(`### ${message}`)
+      }
+
     } else {
       console.warn('There is no NDEReader in window!');
       document.getElementById("mess").innerHTML += "<p>There is no NDEReader in window!</p>";
