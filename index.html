@@ -20,8 +20,8 @@
       addMess('NDEFReader present');
       const reader = new NDEFReader();
 
-      await navigator.permissions.query({name:'nfc'}).then((r)=>{
-        addMess(r);
+      await navigator.permissions.query({name:'nfc'}).then((permissionStatus)=>{
+        addMess(permissionStatus.state);
       })
 
       await reader.scan().then(() => {
