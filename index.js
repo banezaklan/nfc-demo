@@ -472,6 +472,11 @@ window.addEventListener("load", function() {
         reader.scan()
         .then(() => {
           displayOutcome("nfc", "success")("Successfully started NFC scan");
+          addMess("Successfully started NFC scanning");
+          reader.onreading = ({ message }) => {
+            console.log(`Message read from a NFC tag: ${message}`);
+            addMess(`>>> ${message}`);
+          };
         })
         .catch((err) => {
           displayOutcome("nfc", "error")(err);
@@ -515,3 +520,7 @@ window.addEventListener("load", function() {
   }
 
 });
+
+const addMess = (mess)=>{
+  document.getElementById("result").innerHTML += `<p>${mess}</p>`;
+}
