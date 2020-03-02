@@ -513,11 +513,15 @@ window.addEventListener("load", function() {
     }
   };
 
-  for (var type in register) {
-    document.getElementById(type).addEventListener('click',
+  // for (var type in register) {
+  //   document.getElementById(type).addEventListener('click',
+  //     register[type]
+  //   );
+  // }
+
+    document.getElementById('nfc').addEventListener('click',
       register[type]
     );
-  }
 
 });
 
