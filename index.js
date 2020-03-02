@@ -520,7 +520,7 @@ window.addEventListener("load", function() {
   // }
 
     document.getElementById('nfc').addEventListener('click',
-      register[type]
+      register['nfc']
     );
 
 });
