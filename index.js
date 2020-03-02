@@ -475,7 +475,10 @@ window.addEventListener("load", function() {
           addMess("Successfully started NFC scanning");
           reader.onreading = ({ message }) => {
             console.log(`Message read from a NFC tag: ${message}`);
-            addMess(`>>> ${JSON.stringify(message) }`);
+            message.records.forEach(item=>{
+              addMess(`>>> ${JSON.stringify(item) }`);
+            })
+
           };
         })
         .catch((err) => {
